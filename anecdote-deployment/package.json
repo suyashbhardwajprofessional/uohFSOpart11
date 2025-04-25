@@ -1,0 +1,67 @@
+{
+  "name": "redux-anecdotes-deployment",
+  "version": "0.0.1",
+  "description": "backend including frontend production build, destined to deployment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devfe": "vite",
+    "buildfe": "vite build",
+    "build:ui": "rm -rf dist && npm run buildfe",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "lintfe": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "author": "suyash bhardwaj",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.3",
+    "morgan": "^1.10.0",
+    "@reduxjs/toolkit": "^2.5.1",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.3",
+    "redux": "^4.2.1"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^2.12.1",
+    "globals": "^15.14.0",
+    "nodemon": "^3.1.9",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
