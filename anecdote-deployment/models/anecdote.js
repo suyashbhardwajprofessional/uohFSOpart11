@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require('mongoose')
+require('dotenv').config()
 
-const url = process.env.LOCAL_MONGODB_URI;
-mongoose.set('strictQuery', false);
+const url = process.env.LOCAL_MONGODB_URI
+mongoose.set('strictQuery', false)
 
-console.log('connecting to url ', url);
+console.log('connecting to url ', url)
 mongoose
   .connect(url)
   .then(() => {
-    console.log('connection to mongoDB successful');
+    console.log('connection to mongoDB successful')
   })
   .catch(err => {
-    console.log('error connecting to mongoDB: ', err.message);
-  });
+    console.log('error connecting to mongoDB: ', err.message)
+  })
 
 const anecdoteSchema = new mongoose.Schema({
   content: {
@@ -21,14 +21,14 @@ const anecdoteSchema = new mongoose.Schema({
     required: true,
   },
   votes: Number,
-});
+})
 
 anecdoteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
-module.exports = mongoose.model('Anecdote', anecdoteSchema);
+module.exports = mongoose.model('Anecdote', anecdoteSchema)

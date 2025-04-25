@@ -1,21 +1,21 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const baseUrl = '/anecdotes';
+const baseUrl = '/anecdotes'
 
 const getAll = async () => {
-  const response = await axios.get(baseUrl);
-  return response.data;
-};
+  const response = await axios.get(baseUrl)
+  return response.data
+}
 
 const createNew = async content => {
-  const object = { content, votes: 0 };
-  const response = await axios.post(baseUrl, object);
-  return response.data;
-};
+  const object = { content, votes: 0 }
+  const response = await axios.post(baseUrl, object)
+  return response.data
+}
 
 const updateOne = async (id, updatedObj) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedObj);
-  return response.data;
-};
+  const response = await axios.put(`${baseUrl}/${id}`, updatedObj)
+  return response.data
+}
 
-export default { getAll, createNew, updateOne };
+export default { getAll, createNew, updateOne }
