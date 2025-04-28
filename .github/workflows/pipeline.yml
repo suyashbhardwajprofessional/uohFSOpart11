@@ -22,11 +22,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: change directory
-        run: cd anecdote-deployment
-
       - name: Install dependencies
-        run: npm install
+        run: npm --prefix ./anecdote-deployment/ install ./anecdote-deployment/
 
       - name: Check style
         run: npm run lint
