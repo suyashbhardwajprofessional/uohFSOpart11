@@ -14,14 +14,14 @@ const anecdote = {
 	id: '679b45673991d40d2c01571b',
 };
 
-test.only('renders content', () => {
+test('renders content', () => {
 	const { container } = render(<Anecdote theAnecdote={anecdote} />);
 	const div = container.querySelector('.anecdote');
 	expect(div).toHaveTextContent('life is a lemon & i want my money back');
 	expect(div).toHaveTextContent('7');
 });
 
-test.only('if the like button is clicked twice, respective event handler is called twice', async () => {
+test('if the like button is clicked twice, respective event handler is called twice', async () => {
 	const mockHandlerToVote = vi.fn();
 	const { container } = render(<Anecdote theAnecdote={anecdote} voteAction={mockHandlerToVote} />);
 	const user = userEvent.setup();
