@@ -58,3 +58,20 @@ jobs:
       #       severity: error
       #       details: Build Failed!
       #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: condition status
+        run: echo "$CONDITION"
+
+      # - name: Bump version and push tag
+      #   if: ${{ github.event_name == 'push' && env.CONDITION == 'false'}}
+      #   uses: anothrNick/github-tag-action@1.71.0
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     DEFAULT_BUMP: patch
+      #     DRY_RUN: false
