@@ -68,10 +68,10 @@ jobs:
       - name: condition status
         run: echo "$CONDITION"
 
-      # - name: Bump version and push tag
-      #   if: ${{ github.event_name == 'push' && env.CONDITION == 'false'}}
-      #   uses: anothrNick/github-tag-action@1.71.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     DEFAULT_BUMP: patch
-      #     DRY_RUN: false
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && env.CONDITION == 'false'}}
+        uses: anothrNick/github-tag-action@1.71.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: false
