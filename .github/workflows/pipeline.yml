@@ -26,7 +26,7 @@ jobs:
         run: npm --prefix ./anecdote-deployment/ install ./anecdote-deployment/
 
       - name: Check style
-        run: npm run lint
+        run: cd anecdote-deployment/ && npm run lint
 
       - name: build
         run: echo "build job not needed, skiping..."
