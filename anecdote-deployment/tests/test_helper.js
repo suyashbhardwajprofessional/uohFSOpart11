@@ -1,4 +1,4 @@
-const Anecdote = require('../models/anecdote');
+const Anecdote = require('../models/anecdote')
 
 const initialAnecdotes = [
   {
@@ -17,14 +17,14 @@ const initialAnecdotes = [
     content: 'the one to try zero four',
     votes: 4,
   },
-];
+]
 
-anecdotesInDb = async () => {
-  const anecdotes = await Anecdote.find({});
-  return anecdotes.map(anecdote => anecdote.toJSON());
-};
+const anecdotesInDb = async () => {
+  const anecdotes = await Anecdote.find({})
+  return anecdotes.map(anecdote => anecdote.toJSON())
+}
 
 module.exports = {
   initialAnecdotes,
   anecdotesInDb,
-};
+}

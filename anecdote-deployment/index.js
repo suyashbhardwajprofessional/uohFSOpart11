@@ -1,82 +1,82 @@
-const express = require('express');
-var morgan = require('morgan');
-const cors = require('cors');
-const Anecdote = require('./models/anecdote');
-require('dotenv').config();
+const express = require('express')
+var morgan = require('morgan')
+const cors = require('cors')
+const Anecdote = require('./models/anecdote')
+require('dotenv').config()
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(express.static('dist'));
-app.use(express.json());
+app.use(cors())
+app.use(express.static('dist'))
+app.use(express.json())
 
 morgan.token('payload', function getBody(req) {
-  return JSON.stringify(req.body);
-});
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :payload'));
+  return JSON.stringify(req.body)
+})
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :payload'))
 
 app.get('/anecdotes', (request, response) => {
   Anecdote.find({}).then(result => {
-    response.json(result);
-  });
-});
+    response.json(result)
+  })
+})
 
 app.post('/anecdotes', (request, response) => {
-  const body = request.body;
-  console.log('request body is ', request.body);
-  if (!body.content) return response.status(400).json({ error: 'content is missing' });
+  const body = request.body
+  console.log('request body is ', request.body)
+  if (!body.content) return response.status(400).json({ error: 'content is missing' })
 
   const anecdoteObj = new Anecdote({
     content: body.content,
     votes: !body.votes ? 0 : body.votes,
-  });
+  })
 
   anecdoteObj
     .save()
     .then(result => {
-      console.log(`added ${body.content} with votes ${body.votes} to the list of anecdotes`);
-      response.json(result);
+      console.log(`added ${body.content} with votes ${body.votes} to the list of anecdotes`)
+      response.json(result)
     })
-    .catch(error => response.status(400).json({ error: error }));
-});
+    .catch(error => response.status(400).json({ error: error }))
+})
 
 app.put('/anecdotes/:id', (request, response, next) => {
-  const body = request.body;
+  const body = request.body
 
   const anecdote = {
     content: body.content,
     votes: body.votes,
-  };
+  }
 
   Anecdote.findByIdAndUpdate(request.params.id, anecdote, { new: true, runValidators: true, context: 'query' })
     .then(updatedAnecdote => {
-      response.json(updatedAnecdote);
+      response.json(updatedAnecdote)
     })
-    .catch(error => next(error));
-});
+    .catch(error => next(error))
+})
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' });
-};
+  response.status(404).send({ error: 'unknown endpoint' })
+}
 
-app.use(unknownEndpoint);
+app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
-  console.error('From the - AllErrorsHandledAtSinglePlace handler', error.message);
+  console.error('From the - AllErrorsHandledAtSinglePlace handler', error.message)
 
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'the malformatted id' });
+    return response.status(400).send({ error: 'the malformatted id' })
   }
 
-  next(error);
-};
+  next(error)
+}
 
 // this has to be the last loaded middleware, also all the routes should be registered before this!
-app.use(errorHandler);
+app.use(errorHandler)
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server running on port ${PORT}`)
+})
 
-module.exports = app;
+module.exports = app
