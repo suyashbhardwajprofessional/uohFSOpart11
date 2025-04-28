@@ -33,7 +33,7 @@ jobs:
         # run: npm run build
 
       - name: test the application
-        run: cd anecdote-deployment/ && npm run testapi
+        run: cd anecdote-deployment/ && npm test
         # run: npm test
 
   deploy:

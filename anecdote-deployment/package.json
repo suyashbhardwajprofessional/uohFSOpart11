@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "testapi": "node --test",
+    "test": "vitest run",
     "testfrontend": "vitest run",
     "devfe": "vite",
     "buildfe": "vite build",
