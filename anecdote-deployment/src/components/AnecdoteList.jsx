@@ -20,7 +20,7 @@ const AnecdoteList = () => {
 	};
 
 	return (
-		<div>
+		<div className="anecdotes">
 			{notificationMsgInState !== '' && <Notification />}
 			{anecdotes
 				.sort((a, b) => b.votes - a.votes)

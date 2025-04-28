@@ -33,7 +33,7 @@ jobs:
         # run: npm run build
 
       - name: test the application
-        run: echo "test job not needed, skiping..."
+        run: npm run testapi
         # run: npm test
 
   deploy:
