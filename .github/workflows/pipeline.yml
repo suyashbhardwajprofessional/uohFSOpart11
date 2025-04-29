@@ -8,10 +8,7 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
-# name and trigger not shown anymore...
-
 env:
-  # the below will be 'true'
   CONDITION: ${{ contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
 
 jobs:
@@ -30,11 +27,9 @@ jobs:
 
       - name: build
         run: echo "build job not needed, skiping..."
-        # run: npm run build
 
       - name: test the application
         run: cd anecdote-deployment/ && npm test
-        # run: npm test
 
   deploy:
     runs-on: ubuntu-24.04
@@ -42,19 +37,3 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && env.CONDITION == 'false'}}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-
-      # - name: Deploy Success
-      #   uses: rjstone/discord-webhook-notify@v1
-      #   if: success()
-      #   with:
-      #       severity: info
-      #       details: A new version of Pokedox deployed
-      #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-      # - name: Deploy Failure
-      #   uses: rjstone/discord-webhook-notify@v1
-      #   if: failure()
-      #   with:
-      #       severity: error
-      #       details: Build Failed!
-      #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
